@@ -232,6 +232,8 @@ var MAXNAKSHA = 27  /* Max  */
 
 
 async function generate() {
+  document.querySelector('.input').classList.remove('open')
+  document.querySelector('body').classList.remove('lock')
   document.querySelector(".notification").classList.add('open')
   document.querySelector(".notification").innerHTML = 'Generating charts...'
   await parse_input_data();

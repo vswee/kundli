@@ -54,6 +54,12 @@ body.lock header {
           box-sizing: border-box;
 }
 
+@media (max-width: 600px) {
+  .input.open::after {
+    opacity: 1 !important;
+  }
+}
+
 @media (max-width: 1060px) {
   .input {
     position: fixed;

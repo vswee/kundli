@@ -54,6 +54,12 @@ body {
   box-sizing: border-box;
 }
 .input {
+  @media (max-width: 600px){
+    &.open {
+      &::after {
+        opacity: 1 !important;}
+      }
+  }
   @media (max-width: 1060px) {
     position: fixed;
     right: 0;

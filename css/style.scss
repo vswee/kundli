@@ -18,7 +18,22 @@ body {
   text-align: center;
   line-height: 1.3em;
 }
-
+.notification{
+  position: fixed;
+  background: #00ea7c;
+  border-radius: 4px;
+  z-index: 4;
+  left: 1rem;
+  bottom: 1rem;
+  width: calc(100vw - 2rem);
+  margin: auto;
+  color: #000;
+  padding: 1rem;
+  &:not(.open){
+    pointer-events: none;
+    opacity: 0;
+  }
+}
 .main {
   display: grid;
   gap: 3rem;
@@ -38,6 +53,7 @@ body {
   width: 100%;
   border-radius: 3px;
   margin-top: 0.5rem;
+  z-index: 1;
 }
 
 #canvas_info {

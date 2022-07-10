@@ -229,10 +229,19 @@ var MAXNAKSHA = 27  /* Max  */
 //   //}
 // }
 
-function generate() {
-  parse_input_data();
-  calc_position(false);
-  draw(false);
+
+
+async function generate() {
+  document.querySelector(".notification").classList.add('open')
+  document.querySelector(".notification").innerHTML = 'Generating charts...'
+  await parse_input_data();
+  await calc_position(false);
+  await draw(false);
+
+  setTimeout(() => {
+    document.querySelector(".notification").classList.remove('open')
+    document.querySelector(".notification").innerHTML = ''
+  },100)
 }
 
 function parse_input_data() {
@@ -2216,7 +2225,7 @@ function onkeydown(e) {
   else if (e.keyCode == 189) { alert('-'); } // -
 }
 
-function draw(transit) {
+async function draw(transit) {
   var canvas_info = document.getElementById('canvas_info');
 
   var dasha_info = document.getElementById('dasha_table');
@@ -2242,6 +2251,7 @@ function draw(transit) {
 
   draw_info(myinfo, canvas_info, transit);
   draw_dasha(mydashinfo, dasha_info);
+  return true
 }
 
 function draw_zodiacs(canvas) {

@@ -50,6 +50,12 @@ body.lock header {
   max-width: 90vw;
 }
 
+@media (max-width: 600px) {
+  .main {
+    gap: 0 !important;
+  }
+}
+
 #mapEle {
   height: 300px;
   width: 100%;

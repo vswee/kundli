@@ -23,7 +23,7 @@ body {
   display: grid;
   gap: 3rem;
   margin: auto;
-  grid-auto-flow: column;
+  grid-template: 1fr / auto 1fr;
   max-width: 90vw;
 
   > {

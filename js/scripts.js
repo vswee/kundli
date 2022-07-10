@@ -15,6 +15,8 @@ document.querySelector('.trigger').addEventListener("click", () => {
     document.querySelector('body').classList.add('lock')
   }
 })
+
+
 // let mapEle;
 
 // function initMap() {

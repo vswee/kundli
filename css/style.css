@@ -12,27 +12,29 @@ body {
   line-height: 1.3em;
 }
 
+body.lock {
+  overflow: hidden;
+}
+
+body.lock header {
+  z-index: 1;
+  opacity: 0;
+}
+
 .main {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  gap: 5rem;
+  display: -ms-grid;
+  display: grid;
+  gap: 3rem;
   margin: auto;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  max-width: 80vw;
+  grid-auto-flow: column;
+  max-width: 90vw;
 }
 
 #mapEle {
   height: 300px;
   width: 100%;
+  border-radius: 3px;
+  margin-top: 0.5rem;
 }
 
 #canvas_info {
@@ -50,7 +52,87 @@ body {
           box-sizing: border-box;
 }
 
-form {
+@media (max-width: 1060px) {
+  .input {
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 2;
+  }
+  .input form {
+    max-width: 90vw !important;
+    width: 500px !important;
+    padding: 2rem !important;
+  }
+  .input .trigger {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    height: 2.5rem;
+    width: 2.5rem;
+    cursor: pointer;
+  }
+  .input .trigger::before, .input .trigger::after {
+    content: "";
+    height: 4px;
+    width: 100%;
+    position: absolute;
+    background-color: #fff;
+    left: 0;
+    -webkit-transition: 0.4s ease;
+    transition: 0.4s ease;
+  }
+  .input .trigger::before {
+    top: 1rem;
+  }
+  .input .trigger::after {
+    top: calc(2rem + 3px);
+  }
+  .input:not(.open) .input-container {
+    -webkit-transform: translateX(100vw);
+            transform: translateX(100vw);
+  }
+  .input.open {
+    height: calc(100vw);
+    max-width: 90vw;
+    background-color: #000;
+  }
+  .input.open::after {
+    position: fixed;
+    content: "";
+    height: 100vh;
+    width: 100vw;
+    z-index: -1;
+    background-color: #000;
+    top: 0;
+    left: 0;
+    opacity: 0.8;
+    pointer-events: none;
+  }
+  .input.open .trigger::after {
+    -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+    -webkit-transform-origin: 5px 0px;
+            transform-origin: 5px 0px;
+  }
+  .input.open .trigger::before {
+    -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+    -webkit-transform-origin: 10px 4px;
+            transform-origin: 10px 4px;
+  }
+  .input.open .input-container {
+    height: calc(100vh - 2rem);
+    margin-top: 2rem;
+    overflow: auto;
+  }
+  .input .input-container {
+    -webkit-transition: 0.4s ease;
+    transition: 0.4s ease;
+  }
+}
+
+.input form {
   -webkit-box-shadow: 0 0 0 1px #555;
           box-shadow: 0 0 0 1px #555;
   width: 400px;
@@ -63,7 +145,8 @@ form {
   padding: 1.5rem;
 }
 
-form input {
+.input form input,
+.input form select {
   border: none;
   font-size: 1rem;
   width: 100%;
@@ -77,11 +160,11 @@ form input {
   padding: 0.5rem;
 }
 
-form input[type="radio"] {
+.input form input[type="radio"] {
   border: 1px solid #ccc;
 }
 
-form label {
+.input form label {
   text-align: left;
   -webkit-transform: translateY(1rem);
           transform: translateY(1rem);
@@ -94,6 +177,9 @@ form label {
   gap: 2rem;
   padding: 1rem;
   margin-bottom: auto;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
 }
 
 h1,
@@ -125,17 +211,27 @@ a img {
 }
 
 header {
-  padding: 3px 20px 3px;
-  display: block;
+  display: -ms-grid;
+  display: grid;
   position: relative;
+  z-index: 3;
   text-align: center;
-  margin: 10px 10px;
+  margin: 1rem auto 3rem auto;
+  width: 90vw;
 }
 
-header img {
-  position: absolute;
-  right: 20px;
-  top: 10px;
+@media (max-width: 600px) {
+  header {
+    max-width: calc(90vw - 6rem);
+    margin-left: 1rem;
+  }
+  header .logo {
+    height: 50px !important;
+  }
+}
+
+header .logo {
+  height: 80px;
 }
 
 header h1 {

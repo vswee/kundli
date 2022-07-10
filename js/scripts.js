@@ -2,26 +2,76 @@
 
 window.onload = generate;
 
+document.querySelector('.trigger').addEventListener("click", () => {
+  if (document.querySelector('.input').classList.contains('open')) {
+    document.querySelector('.input').classList.remove('open')
+  } else {
+    document.querySelector('.input').classList.add('open')
+  }
 
-let mapEle;
+  if (document.querySelector('body').classList.contains('lock')) {
+    document.querySelector('body').classList.remove('lock')
+  } else {
+    document.querySelector('body').classList.add('lock')
+  }
+})
+// let mapEle;
 
-function initMap() {
-  mapEle = new google.maps.Map(document.getElementById("mapEle"), {
-    center: { lat: -34.397, lng: 150.644 },
-    zoom: 8,
-  });
+// function initMap() {
+// mapEle = new google.maps.Map(document.getElementById("mapEle"), {
+//   center: { lat: 10.524735, lng: -61.475411 },
+//   zoom: 8,
+// });
 
-  google.maps.event.addListener(mapEle, "click", function (e) {
-    document.getElementById("lat").value = e.latLng.lat().toFixed(6)
-    document.getElementById("lon").value = e.latLng.lng().toFixed(6)
-  });
-}
+// google.maps.event.addListener(mapEle, "click", function (e) {
+//   document.getElementById("lat").value = e.latLng.lat().toFixed(6)
+//   document.getElementById("lon").value = e.latLng.lng().toFixed(6)
 
-window.initMap = initMap;
+//   const marker = new google.maps.Marker({
+//     position: { lat: document.getElementById("lat").value, lng: document.getElementById("lon").value },
+//     map: mapEle,
+//   });
+// });
+
+
+
+// }
+
+// window.initMap = initMap;
 
 
 
 var name, date, time, tz, lat, lon, latdir, londir, lattmp, lontmp, dn, forward = 0;
+
+
+
+var marker;
+
+lat = Number(document.getElementById("lat").value)
+lon = Number(document.getElementById("lon").value)
+
+var mapEle = L.map('mapEle').setView([lat, lon], 8);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19,
+  attribution: '© OpenStreetMap'
+}).addTo(mapEle);
+
+mapEle.on('click', function (e) {
+  // alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
+  let latitude = e.latlng.lat.toFixed(6)
+  let longitude = e.latlng.lng.toFixed(6)
+  document.getElementById("lat").value = latitude
+  document.getElementById("lon").value = longitude
+  // mapEle.removeLayer(marker)
+  // L.marker([latitude, longitude]).addTo(mapEle);
+  if (marker) { mapEle.removeLayer(marker) }
+  marker = new L.Marker(e.latlng, {draggable:true});
+  mapEle.addLayer(marker);
+  marker.bindPopup("<b>My birthplace</b>").openPopup();
+ console.log(e)
+});
+
+
 
 var DEGS = 180 / Math.PI;
 var RADS = Math.PI / 180;
@@ -190,8 +240,13 @@ function parse_input_data() {
   tz = (document.getElementById('tz').value);
   // parse_latitude(document.getElementById('lat').value.toUpperCase());
   // parse_longitude(document.getElementById('lon').value.toUpperCase());
-  lat = document.getElementById('lat').value
-  lon = document.getElementById('lon').value
+  lat = Number(document.getElementById('lat').value)
+  lat = isNaN(lat) ? 0 : lat
+  lon = Number(document.getElementById('lon').value)
+  lon = isNaN(lon) ? 0 : lon
+
+  // alert(lat + ', ' + lon)
+
 }
 
 function parse_date(input) {
@@ -1097,6 +1152,7 @@ function calc_moon_positionI() {
     + 0.2806 * Math.sin((Mm + F) * RADS)
     + 0.2777 * Math.sin((Mm - F) * RADS)
     + 0.1732 * Math.sin((2 * D - F) * RADS);
+
 
   var term = 6.289 * Math.sin(Mm * RADS)
     + 1.274 * Math.sin((2 * D - Mm) * RADS)

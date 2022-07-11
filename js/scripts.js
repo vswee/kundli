@@ -1,4 +1,7 @@
-
+setTimeout(() => {
+  document.querySelector(".notification").classList.remove('open')
+  document.querySelector(".notification").innerHTML = ''
+},100)
 
 window.onload = generate;
 

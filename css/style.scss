@@ -3,9 +3,15 @@
   compliment: rgba(0, 255, 183, 1);
 }
 body {
-  &.lock{
+  @media (max-width: 500px) {
+    display: grid;
+height: 100vh;
+width: 100vw;
+overflow: hidden;
+  }
+  &.lock {
     overflow: hidden;
-    header{
+    header {
       z-index: 1;
       opacity: 0;
     }
@@ -14,11 +20,11 @@ body {
   font-family: "Montserrat", sans-serif;
   // font-size: 78%;
   color: rgb(238, 238, 238);
-  margin: 20px auto;
+  margin: 0;
   text-align: center;
   line-height: 1.3em;
 }
-.notification{
+.notification {
   position: fixed;
   background: #00ea7c;
   border-radius: 4px;
@@ -29,7 +35,7 @@ body {
   margin: auto;
   color: #000;
   padding: 1rem;
-  &:not(.open){
+  &:not(.open) {
     pointer-events: none;
     opacity: 0;
   }
@@ -40,9 +46,9 @@ body {
   margin: auto;
   grid-template: 1fr / auto 1fr;
   max-width: 90vw;
-  @media (max-width:600px) {
-  gap: 0 !important;
-    
+  @media (max-width: 500px) {
+    gap: 0 !important;
+    max-width: 100vw;
   }
   > {
     div {
@@ -73,11 +79,15 @@ body {
   box-sizing: border-box;
 }
 .input {
-  @media (max-width: 600px){
+  @media (max-width: 500px) {
     &.open {
       &::after {
-        opacity: 1 !important;}
+        opacity: 1 !important;
       }
+      form {
+        box-shadow: none;
+      }
+    }
   }
   @media (max-width: 1060px) {
     position: fixed;
@@ -86,46 +96,49 @@ body {
     z-index: 2;
 
     form {
-      max-width: 90vw !important;
+      max-width: 100vw !important;
       width: 500px !important;
-      padding: 2rem 2rem 6rem 2rem !important;
+      padding: 0.5rem 2rem 6rem 2rem !important;
     }
 
     .trigger {
       position: fixed;
-      top: 1rem;
-      right: 1rem;
-      height: 2.5rem;
-      width: 2.5rem;
+      top: 0;
+      right: 0;
+      // height: 3.5rem;
+      // width: 3.5rem;
       cursor: pointer;
+      padding: 0rem 1rem 1rem 1rem;
 
       &::before,
       &::after {
         content: "";
         height: 4px;
-        width: 100%;
-        position: absolute;
+        width: 2.5rem;
+        position: relative;
+        display: block;
         background-color: #fff;
         left: 0;
         transition: 0.4s ease;
       }
 
       &::before {
-        top: 1rem;
+        margin-top: 2rem;
       }
       &::after {
-        top: calc(2rem + 3px);
+        margin-top: calc(1rem + 3px);
       }
     }
     &:not(.open) {
-      .input-container {
+      width: 5rem;
+      height: 5rem;
+        .input-container {
         transform: translateX(100vw);
       }
     }
     &.open {
-      height: calc(100vw);
-      // overflow: auto;
-      max-width: 90vw;
+      height: 100vh;
+      max-width: 100vw;
       background-color: #000;
       &::after {
         position: fixed;
@@ -142,17 +155,23 @@ body {
       .trigger {
         &::after {
           transform: rotate(-45deg);
-          transform-origin: 5px 0px;
+          transform-origin:0px 0px;
         }
         &::before {
           transform: rotate(45deg);
-          transform-origin: 10px 4px;
+          transform-origin: 8px 2px;
         }
       }
       .input-container {
         height: calc(100vh - 2rem);
         margin-top: 2rem;
+        max-width: 100vw;
         overflow: auto;
+        > {
+          h1 {
+            padding-left: 2rem;
+          }
+        }
       }
     }
     .input-container {
@@ -207,6 +226,14 @@ body {
   //   max-width: calc(100vw - 2rem);
   //   overflow: auto;
   // }
+  width: 100%;
+  overflow: auto;
+  height: 100%;
+  @media (max-width:500px) {
+    height: calc(100vh - 6rem);
+padding-bottom: 6rem;
+    
+  }
 }
 
 h1,
@@ -240,14 +267,15 @@ a img {
 }
 
 header {
-  @media (max-width: 600px) {
+  @media (max-width: 500px) {
     max-width: calc(90vw - 6rem);
-    margin-left: 1rem;;
-    .logo{
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    .logo {
       height: 50px !important;
     }
   }
-    display: grid;
+  display: grid;
   position: relative;
   z-index: 3;
   text-align: center;

@@ -70,7 +70,7 @@ mapEle.on('click', function (e) {
   marker = new L.Marker(e.latlng, {draggable:true});
   mapEle.addLayer(marker);
   marker.bindPopup("<b>My birthplace</b>").openPopup();
- console.log(e)
+//  console.log(e)
 });
 
 
@@ -2004,9 +2004,9 @@ function calc_all_vimsottari_dasa() {
     j = ((th_y * j2) / 120)
     j1 = j * 365 * 24 * 60;
     _t.addMinutes(j1)
-    console.log(th_y, j2, j);
+    // console.log(th_y, j2, j);
     var c = new Date(_t);
-    console.log(dasa_seq[nlord][i] + " " + c.toISOString().split('T')[0]);
+    // console.log(dasa_seq[nlord][i] + " " + c.toISOString().split('T')[0]);
   }
 
 
